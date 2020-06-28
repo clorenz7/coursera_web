@@ -1,30 +1,20 @@
-## Welcome to GitHub Pages
+# Overview
 
-You can use the [editor on GitHub](https://github.com/clorenz7/coursera_web/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+As of June 2020, I am taking a Coursera class on web development with HTML, CSS, and JS. Below you will find examples of what I learned and worked on. The sites are hosted by GitHub pages.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## Module 2 (HTML/CSS) Coding Assignment
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The goal was to create a responsive layout using HTML and CSS.
 
-```markdown
-Syntax highlighted code block
+[Spec](https://github.com/jhu-ep-coursera/fullstack-course4/blob/master/assignments/assignment2/Assignment-2.md)
 
-# Header 1
-## Header 2
-### Header 3
+[My Solution](https://clorenz7.github.io/coursera_web/module2_solution/)
 
-- Bulleted
-- List
+[My code](https://github.com/clorenz7/coursera_web/tree/master/module2_solution)
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
+## GitHub Pages Info
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
