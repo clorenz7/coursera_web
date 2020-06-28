@@ -26,7 +26,6 @@ h1 {
 .header {
     float: right;
     clear: right;
-    width: 35%;
     text-align: center;
     padding: 3px 20px 3px 20px;
     border: 1px solid black;
@@ -72,10 +71,6 @@ h1 {
     #main_contain {
         width: 92%;
         clear:left
-    }
-
-    #main {
-        width: 20%;
     }
 
 }
