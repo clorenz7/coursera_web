@@ -10,7 +10,6 @@
 }
 
 .navbar {
-    /*background-color: #89adfa;*/
     background-color: blue;
     border: 2px black solid;
 }
@@ -37,15 +36,9 @@
     margin: 0px;
 }
 
-#nav-list > li {
-    /*background-color: gray;*/
-    /*text-align: center;*/
-}
-
 #nav-list > li > hr {
     margin: 1px;
 }
-
 /* End Header */
 
 body {
