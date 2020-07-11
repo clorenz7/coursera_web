@@ -1,4 +1,4 @@
-# Week 1
+# Module 1: HTML
 
 Resources:
 - jsfiddle.net for providing sample code to folks
@@ -80,6 +80,8 @@ Lec 10: Displaying Images
 - width and height are useful to visually partition the page so that it is not jumpy as the image loads. And in case the image does not load.
 - option-cmd-i will open up chrome developer tools. You can throttle the DL speed in the network tab.
 - Commenting in HTML: `<!--COMMENT -->`
+
+# Module 2: CSS
 
 Lec 11: Power of CSS (Cascading Style Sheets)
 - HTML defines the structure of the content
@@ -284,4 +286,114 @@ Lecture 26: Boostrap Grid System
 - `col-SIZE-SPAN` is the column identifier. SIZE=md, lg, etc. SPAN is how many columns the element should span (1 through 12) (e.g. col-md-4)
 - Columns will collapse (stack) below SIZE width.
 - `col-xs` will never collapse
+
+# Module 3 - Coding a Static Site
+
+Lecture 27: Client Visit
+- Most clients have no ideas what they want, but don't know how to translate what they need to software.
+- Bring web site examples of similar businesses
+- They will have lots of important information. But not everything can be important: Less is MORE. Don't cram info.
+- Find a way for the client to invest in the project, some skin in the game. Commit for something.
+- Have one person responsible for decisions, so that you don't get conflicting demands
+- Limit the number of (free) revisions upfront
+- Google for web development client questionaire
+- Can ask young people in school to do things for free for their resume (or small fee)
+- Understand what client has right now
+
+Lecture 28: Design Overview
+- Worst thing to do is to start coding right away, you want to have layout mockups to present and get approval. Then you code.
+- balsamiq.com is a mock up tool you can use (but it costs)
+- You can check the components of the mockup in to a repository.
+- It is best to use [Google fonts](http://google.com/fonts)
+- Designer will give you color schemes (hex vals) and fonts.
+- Photoshop is typically used by designers, but you can also use powerpoint.
+
+Lecture 29: Overview of Setup
+- Rules: use videos and source code
+- Current lecture's before will contain previous lectures after as a starting point.
+- if you go to `localhost:3001` you can see the UI for browsersync and configure it
+- Use jquery-2.1.4 or greater and bootstrap
+- Use google fonts to get the `<link>` you need to add to your page, and the proper family
+
+Lecture 30: Navbar Header
+- Use `--files "**/*"` to also capture changes to CSS.
+- We can use symantic tag `<header>` for the navbar with `<nav>` tag. There are `class="navbar navbar-default"` from bootstrap
+- Use `class="container"` to keep content width constrained, inside the nav element
+- `class="navbar-header"` is good for a logo in upper left. You can look at the source
+- Look at components in the bootstrap documentation.
+- `<a>` makes something clickable. `<alt="logo image">` lets renderer know what something is
+- You can use `backgound: url(...)` in the CSS to display the image as well
+- `class="navbar-brand"` is another bootstrap element.
+- `class=pull-left"` is the bootstrap way of doing float left
+-  `text-transform:uppercase` makes it all uppercase. You can also do `text-shadow`
+- You can disable underline with `text-decoration: none`. Need to specify with `.navbar-brand a:focus` and `a:hover`
+- If we want an element to be visible at a particular size (breakpoint). You can use `class=visible-md`
+
+Lecture 31: Collapsible Button Menu
+- We use `<button type="button" class="navbar-toggle collapsed"` from Bootstrap to add the menu
+- `data-` lets JS get at elements easily.
+
+Lec 32: Coding Nav Menu Buttons
+- `data-target=#collapsable-nav` makes the div with that id be visible
+- Can use `<ul class="nav navbar-nav navbar-right">` to make the navbar and pull it to the right (a rightward going list)
+- `<span class="glyphicon glyphicon-cutlery>` pulls in an icon font, a vector image that behaves like a font. These glyphicons come from bootstrap.
+- `<br class="hidden-xs">` make the line break dissapear when the screen is small. You can also do this with text.
+- `<a href="tel:410-602-5008">` is how you link to a phone call.
+- `text-align: right` will make blocks of text align to the right
+- Applying `clear:both` makes it so that the header color extends to all elements within the header.
+
+Lec 33: Fixing Menus
+- You can edit values (of width, etc) in the chrome dev tools!
+- `font-size 5vw;` 5 % of viewport width
+
+
+Lec 34: Coding the Jumbotron
+- The jumbotron is the large picture in bootstrap
+- We need a top level element `container` for the main content of the site.
+- Emmit plugin allows you to write `div.container` and turn it into tags.
+- We can use `class=img-responsive visible-xs` to change the size of the image with screen size, and the image only shows up in extra small.
+- `no-repeat` is important for background images. Match image size to lowest width of media queries.
+- `box-shadow` is cool for images
+- You can uncheck properties in the chrome renderer.
+- Specificity (number of classes when styling, eg `.container .jumbotron {}`) is important!
+
+Lecture 35: Coding the navigation tiles
+- Every bootstrap grid has be in a `container`
+- Use `class=row` for navigation tiles holder. We can use the `class=col-md-4 col-sm-6` for the individual elements
+- Can create a map with:
+```css
+<a href="" target="_blank">
+    <div id="map-tile">
+    <span>map</span> </div></a>
+```
+- `overflow: hidden` on the map-tile container is important to keep the map inside
+- `#menu-tile:hover` with `box-shadow` is good for giving the user indication if they click
+- `placehold.it` can be used to have image placeholders of various sizes
+- `background-position: center;` allows you to keep the image centered as the container changes size.
+- Can use `opacity: 0.8` to make them a little seethrough
+- Google maps can give you an embedded (`<iframe>`) and link to the map
+- Can right click and do "inspect" on an element
+- Can center the tiles on the small screen where images are too small with ` width: 360px, margin 0 auto 15 px;`
+
+Lecture 36: Coding the Footer
+- It's a good practice to add what ends the div on the line with the closing tag
+- Can use semantic tag `<footer class="panel-footer">` with a class=container inside, with a class=row inside. Then `<section>`
+- Using `class="col-sm-4"` makes it have 3 columns for small or larger.
+- `<hr class="visible-xs">` (horizontal rule) makes a horizontal line only when extra small.
+
+Lecture 37: Coding the Menu Categories
+- Can copy the index.html to make the menu-categories.html, and remove anything in the main content.
+- There is a bootstrap class `text-center`
+- Use `<section class="row">` to hold all of the tiles.
+- `margin: 0 auto 15px` defines top, center, bottom, then implicitly the right to be centered since the left is
+- `#menu-categories-title + div` means the next div sibling of that #id.
+- You can copy styles from bootstrap classes if you want to make your own sizes
+
+Lecture 38: The Single Menu Category Page
+- You can do bootstrap grids inside of bootstrap grids!
+- You can use `<li class="active">` to indicate that you are on that specific page.
+- If the text gets too long in your grid, it can throw off all of the locations in your page.
+- The problem is that the layout is based on floating to the left. We need to use the clear functionality. Look on bootstrap "responsive column resets". Use `<div class="clearfix visibile-md-block visible-lg-block">` inside of grid, after each even numbered element.
+- The last thing is to dynamically insert content in to these pages
+
 
