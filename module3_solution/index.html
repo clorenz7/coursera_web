@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Module 3 Assignment Solution</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+
+    <header>
+      <nav id="header-nav" class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <span id="company-name" class="navbar-brand">City Food, LLC</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <div id="collapsable-nav" class="collapse navbar-collapse">
+            <ul id="nav-list" class="nav navbar-nav navbar-right">
+              <li class="visible-xs text-center"><span><a href="#chicken-tile">City Chicken</a></span><hr class="visible-xs"></li>
+              <li class="visible-xs text-center"><span><a href="#beef-tile">City Beef</a></span><hr class="visible-xs"></li>
+              <li class="visible-xs text-center"><span><a href="#sushi-tile">City Sushi</a></span><hr class="visible-xs"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div id="main-content" class="container">
+      <h1 class="text-center">Our Menu</h1>
+
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="tile" id="chicken-tile">
+            <div class="cat-title"> City Chicken </div>
+            <img id="chicken-img" src="https://polishhousewife.com/wp-content/uploads/2018/11/24FB88E3-1FE0-40AE-AA13-3FB546919804.jpg">
+            <p> Back in the day when chicken was expensive and veal and pork were cheap, 'city chicken' was a skewer of pork or pork and veal cubes, coated, deep fried and then baked to resemble fried chicken. Pork is still relatively inexpensive, and this is still an old-fashioned comfort food from days gone by.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="tile" id="beef-tile">
+            <div class="cat-title"> City Beef </div>
+            <img id="beef-img" src="https://media.indiedb.com/cache/images/games/1/28/27554/thumb_620x2000/beefCityColour.jpeg">
+            <p> City Beef CO in Trenton, NJ has been serving Mercer County and beyond with quality meats, poultry, fruits, vegetables, cheeses and more for over 50 years. With wholesale quantities now available to the public, City Beef is your preferred choice for your next function from corporate to back yard barbecue.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="tile">
+            <div class="cat-title" id="sushi-tile"> City Sushi </div>
+            <img id="sushi-img" src="http://southparkstudios.mtvnimages.com/shared/locations/city-sushi.jpg">
+            <p> "City Sushi" is the sixth episode of the fifteenth season of the American animated sitcom South Park, and the 215th episode of the series overall. It premiered on Comedy Central in the United States on June 1, 2011. In the episode, Butters is misdiagnosed with multiple personality disorder.</p>
+          </div>
+        </div>
+      </div>
+    </div> <!-- Main Content -->
+
+  <!-- jQuery (Bootstrap JS plugins depend on it) -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+ </body>
+</html>
