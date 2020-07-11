@@ -2,6 +2,16 @@
 
 As of June 2020, I am taking a Coursera class on web development with HTML, CSS, and JS. Below you will find examples of what I learned and worked on. The sites are hosted by GitHub pages.
 
+## Module 3 (Bootstrap) Coding Assignment
+
+The goal was to create a responsive layout with a nav bar and dropdown using Bootstrap.
+
+[Spec](https://github.com/jhu-ep-coursera/fullstack-course4/blob/master/assignments/assignment3/Assignment-3.md)
+
+[My Solution](https://clorenz7.github.io/coursera_web/module3_solution/)
+
+[My code](https://github.com/clorenz7/coursera_web/tree/master/module3_solution)
+
 
 ## Module 2 (HTML/CSS) Coding Assignment
 
