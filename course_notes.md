@@ -396,4 +396,222 @@ Lecture 38: The Single Menu Category Page
 - The problem is that the layout is based on floating to the left. We need to use the clear functionality. Look on bootstrap "responsive column resets". Use `<div class="clearfix visibile-md-block visible-lg-block">` inside of grid, after each even numbered element.
 - The last thing is to dynamically insert content in to these pages
 
+# Week 4 - Javascript
+
+Lecture 40: Dev Env for JS
+- Console tab (rather than elements) in Chrome dev tools gives you Javascript console
+- You can write Js inside a `<script>*code here*</script>` tag. Or `<script src="js/script.js></script>`
+- Script tags are executed sequentially.
+- `var x = "Hello World!"`
+- console.log() is how you write to console
+- JS is a single threaded engine
+- You can define JS in the body as well as the head.
+
+Lec 41: Variables, Function, and Scope
+- JS is dynamically typed language
+- Function named a defined like:
+```javascript
+function a () {
+
+}
+```
+or `var a = function () {...}`
+- Both would be invoked with `a();`
+- Arguments defined like `(x,y)`
+- All arguements defined in a javascript function are optional!!
+- In JS, functions define new scope. Vars and functions defined with global scope are available everywhere.
+- Functions have a way of getting at the definitions in the functions in which they were created.
+- This is the scope chain: everything in JS is executed in an execution context, and a function invocation creates a new context.
+- Each EC has its own variable envioronment. And the `this` object, as well as a reference to its outer environment.
+- Referenced variables will be searched for in the entire chain going out to global scope, relative to where the function is *defined*, not from where it is called!
+
+Lec 42: Javascript Types
+- A type is a particular data structure
+- JS has 7 built-in types: 6 primitive, 1 object type
+- An object is a collection of name/value pairs
+- A value can be a nested object:
+```javascript
+name: "cory"
+social: {
+    linkedin: "cory",
+    twitter: "corycory",
+}
+```
+- Primitive type represents a single immutable value: not an object.
+- Prim types: boolean, undefined (no value has ever been set [never do this to a var]: lacks definition), Null (signifies lack of value), Number (always a float64, no ints), String, Symbol (not covered in this class, new in ES6).
+- `var x;` will result in x being `undefined` can do `(x == undefined)` to test.
+- `undefined` means declared, but not defined. You can get "not defined" errors.
+
+
+Lecture 43: Common Language Constructs
+- string concat like python with `string += "World"`, etc.
+- `undefined / 5` will output `NaN`. A `NaN` will typically represent an unspecified input variable to a function, which will result in it being `undefined`.
+- You can do `var x=4, y=4;`
+- `var x="4", y=4; x == y` will evaluate to `true`!!! This is type coersion, which forces types to be the same.
+- You get around this with strict equality `x === y`
+- What JS considers `false`: `null || undefined || "" || 0 || NaN`. (The or operation short circuits)
+- You can use `Boolean(x)` to check the coersion of x.
+Considered true: `true && "hello" && 1 && -1 && "false"` (The And operation also short circuits)
+- In JS the best practice with curly braces is a matter of syntax.
+```javascript
+return
+{
+    name: "cory"
+}
+```
+will actually return `undefined` since JS will add an implicit semicolon on the return statement.
+- Semicolons are optional, but are considered best practice to use.
+- For loop:
+``` for (var i=0; i <10; i++) {}```
+
+Lec 44: Handling Default Values
+- Can do this (via type coersion) if x is not defined:
+```javascript
+function add5(x) {
+    x = x || 3;
+    return x + 5;
+}
+```
+
+Lecture 45: Creating Objects
+- An Object is a collection of name value pairs.
+- Creation: `var company = new Object()`
+- `company.name = "FB"` will create it.
+- Have to do `company.ceo = new Object();` in order to do `company.ceo.name="Zuck"`
+- Can also get at properties with `company["name"]` this allows you to have property names with spaces in them
+- Object literal is a better way to do it:
+```javascript
+var fb = {
+    name: "FB",
+    ceo: {
+        name: "Zuck",
+        color: "blue"
+    },
+    "stock of company": 110 // NO COMMA!
+}
+```
+
+Lecture 46: Functions Explained
+- Functions are objects
+- Functions are first-class data types. You can pass them around as inputs or outputs.
+- You can set properties on functions!
+- The value of the function is the actual code, you can do `func.toString()`
+- So you can make a function factory that returns functions.
+
+Lecture 47: Passing by value or by reference.
+- Primitives are passed by value (copied), objects are passed by reference.
+- The point is that for objects the memory location is passed by value / copied
+- With functions, the input memory is copied, so objects are by reference, primitives by value
+
+Lec 48: Function constructors, prototype and this keyword:
+- `this` for a function points to the Global Window object. `window` is the global object.
+- Capitalizing the first letter of a functio name lets you know it is a function constructor. But it kinda constructs an object.
+- You can't return anything from the function.
+- You can make them have methods!
+```javascript
+function Circle(radius) {
+    this.radius = radius;
+    this.getArea =
+        function () {
+            return Math.PI * Math.pow(this.radius, 2)
+        };
+}
+var myCircle = new Circle(10); // is basically new Object()
+```
+- You can use a prototype to avoid having to make these functions over and over again by placing this outside of the Circle definition:
+```javascript
+Circle.prototype.getArea =
+    function() {
+        return Math.PI * Math.pow(this.radius, 2);
+    }
+```
+- It will live inside of `__proto__` of the Circle object, so function will be shared.
+- If you skip the `new` keyword, the Circle(10) will return undefined since that function returns nothing.
+
+Lec 49: Object Literals and "this"
+- Defining a function inside of a literal object, you can use `this` to get at the object.
+- This is because `{} -> new Object()` and `new` redefines `this`.
+- But a subfunction inside the literal object points to the global window!!!!
+Get around the issue by:
+```javascript
+var self = this;
+
+var inc = function() {
+    self.radius = 20;
+}
+```
+
+Lec 50: Arrays
+- Can mix object types, example:
+```javascript
+var array = new Array()
+array[0] = "Y";
+array[1] = 2;
+array[2] = function(name) {cosole.log(name);};
+array[3] = {course: "HTML"};
+```
+- Shorthand notation: `var names = ["Y", "J", "J"];`
+- `names.length` gives you the length
+- Arrays can be sparse: `names[100] = "Jim";` will have undefined elements in between.
+- There is a way to loop over objects:
+```javascript
+for (var prop in myObj) {
+    console.log(prop + ":" + myObj[prop]);
+}
+```
+- Can do this with arrays too:
+```javascript
+for (var name in names) {
+    console.log("Hello" + names[name])
+}
+```
+- If you have a property on the Array (it is an object!) it will also get printed in the above.
+
+Lec 51: Closures
+- Return doesn't really create its own context / reference / `this`
+```javascript
+function makeMultiplier (multiplier) {
+    return (
+        function(x) { return multiplier * x;}
+    );
+}
+var doubleAll = makeMultiplier(2)
+console.log(doubleAll(10)); // gets its own exec env
+```
+- So how does the `doubleAll` know the multiplier value is 2? Because of closures. JS preserves the outer lexical environment for the returned funcion in memory.
+
+Lecture 52: Fake Namespaces
+- Two scripts (JS files) with the same variable names can over-ride one another. Because they go in the global scope.
+- We need to use namespaces, JS does not have them, so we hack them in:
+```javascript
+var Greeter = {};
+Greeter.name = "Cory";
+Greeter.sayHello = function () {
+    console.log("Hello " + Greeter.name);
+}
+```
+- Immediately Invoked Function Expressions (IIFEs)
+```javascript
+function a() {
+    console.log("Hello");
+}
+
+// Alternately can run with:
+(function() {
+    console.log("Hello");
+})();
+```
+- So you can write the entire Greeter stuff inside of an IIFE and pass in the window:
+```javascript
+(function (window) {
+    var Greeter = {};
+    Greeter.name = "Cory";
+    Greeter.sayHello = function () {
+        console.log("Hello " + Greeter.name);
+    }
+
+    window.Greeter = Greeter; // expose to outside
+})(window); // IFFE with passing in the window
+```
+
 
