@@ -810,5 +810,6 @@ Lec 62: Dynamic Load of Single Category View
 - You can insert the `clearfix` CSS class with Javascript
 
 Lec 63: Changing Active Button Style
-- You do this by changing the CSS class of the button from home to menu as needed.
+- You do this by changing the CSS class to add or remove `active` of the button from home to menu as needed.
+- Angular is backed by Google, and it is used for SPAs Single Page Applications.
 
