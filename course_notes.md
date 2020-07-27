@@ -614,4 +614,201 @@ function a() {
 })(window); // IFFE with passing in the window
 ```
 
+# Module 5: JS for Web Apps
+
+Lec 53: DOM Manipulation
+- Document Object Model (DOM)
+- Found at `window.document` the document object contains the entire HTML page. This is how we can get at individual elements within the page.
+- `document.getElementById("title")` it returns the `<h1 id="title"> Lecture 53</h1>`
+- global scope is `window`, so in global scope, we can just use `document`
+- Script is executed exactly where it is loaded, so all of the page might not be loaded.
+- You can put the `<script>` at the end of the document to get around this.
+- `document instanceof HTMLDocument`  returns true. There are many methods in that class.
+- `<button onclick="sayHello()"> Say it! </button>` will call sayHello when the button is clicked:
+```javascript
+function sayHello () {
+    var name = document.getElementById("name").value;
+    var message = "Hello " + name + "!";
+}
+```
+- You can have an empty div in your document `<div id="content" ></div>` and then retreive it:
+```javascript
+document
+    .getelementById("content")
+    .textContent = message;
+```
+Alternately to make the new text styled:
+```javascript
+document
+    .getelementById("content")
+    .innerHTML = "<h2>" + message + "</h2>";
+```
+- If we want to change other elements based on this, we can do:
+```javascript
+if (name === "student") {
+    var title =
+        document
+            .querySelector("#title") // By CSS selector
+            .textContent;
+    title += " & Lovin' it!";
+    // Need to set it since it is a primitive
+    document
+        .querySelector("#title") // or "h1"
+        .textContent = title;
+}
+```
+- There is also a queryAllSelector to get a list of things.
+
+Lec 54: Handling Events
+- Event handlers are function that are run based on events to an element. Can be things like `onfocus` `on keydown` `onblur` (when loses focus, ie click away)
+- Can do function `sayHello (event)` which will cause `this` to point to the window object.
+- Inserting this stuff in to your HTML is a bit messy (HTML is supposed to be about content), so you can use "unobtrusive event binding":
+```javascript
+document.querySelector("button")
+    .addEventListener("click", sayHello);
+```
+which causes `this` to point to the containing (eg button) element.
+- You can also do:
+```javascript
+document.querySelector("button")
+    .onclick = sayHello;
+```
+- There is an event to run things before images or CSS are loaded.
+```javascript
+document.addEventListener("DOMContentLoaded")
+    function (event) {
+        // Define sayHello, add listeners, etc.
+    }
+
+```
+which you can use to assign all of the event listeners.
+- This ensures that all of the elements exist.
+
+Lec 55: The Event Argument
+- Looking at the event handler passed to the attached function
+- Is a class like `mouseEvent` with a bunch of properties like coordinates, shift key status, etc.
+- You can look up the API for these events on the http://developer.mozilla.org webpage
+- There is a MouseMove event. So we can log the mouse location when it moves while the shift key is pressed.
+```javascript
+document.querySelector("body")
+    .addEventListener("mousemove",
+        function (event) {
+            if (event.shiftKey === true) {
+                console.log("x: " + event.clientX);
+                console.log("y: " + event.clientY);
+            }
+        }
+    );
+```
+
+Lecture 56: HTTP Basics
+- Request/response stateless protocol. Response does not depend on previous requests. Server does not keep track of what the browser has done before.
+- Client opens connection to server
+- Client sends HTTP request for a resources
+- Server sends HTTP response to the client
+- Client closes connection to server
+- URN: Uniform Resource Name: uniquely identifies resource or name of it, does not tell us how to get the resource. Example, this course: `HTML/CSS/Javascript/Web Developers/Yaakov/Chaikin` unique within the Coursera platform
+- URI: Uniform Resource Identifier: Uniquely identifies resource or location of resource. Does not tell us how to get to the resource. example: `/official_site/index.html` It doesn't tell you where to get it (eg `coursera.org`).
+- URL: Uniform Resource Locator: A URI that provides info on how to get resource. (eg `http://mysite.com/official/index.html`)
+- Example GET request:
+`GET /index.html?firstName=Cory HTTP/1.1`
+GET: method
+before ?: URI string
+after ?: Query string
+last part: version
+- This is a URI because it is only issued after the browser connects to the server
+(need to dial your number before you start talking)
+- Methods:
+GET: retrieves the resources, uses query string to pass data (not stored)
+POST: Sends data to server in order to be processes (sent in message body)
+- Response structure:
+`HTTP/1.1 200 OK`
+`version, code, english description`
+Example larger response:
+```
+HTTP/1.1 200 OK
+Date: Tue, 11 Aug 2004
+Content-Type: text/html
+<html>
+<body> ...
+```
+- 200 is OK
+- 404 is Not Found
+- 403 is Forbidden (unauthenticated)
+- 500 Internal Server Error (unhandled on server)
+
+Lec 57: Ajax Basics
+- AJAX: Asynchronous Javascript and XML
+- Few apps use XML now, is mostly plaintext/HTML and JSON.
+- Old web app flow was press button, get back entire new page, even for minor update
+- In AJAX flow, the server replies teh small piece of data to insert. Faster response, less BW.
+- Synchronous means one instruction at a time. Have to wait until a previous instruction as finished.
+- With async you have separate threads or processes, so you run right away.
+- JS is single threaded, how possible?
+- JS engine is not only thing in the browser. There is also an event queue, and HTML rendering engine, webGL for graphics, and an HTTP requestor. The requestor is asynchronous.
+- There is a special JS object to make the Ajax request. The response is not waited on. You pass in a JS function to handle the response (callback function).
+- `request = new XMLHttpRequest()` is the object you use to make Ajax requests. Then use `request.onreadystatechange = function() {handleResponse(...);};`
+- `request.open("GET", requestUrl, true)` sends it (if false, it is synchronous).
+- `request.send(null);` sends it, `null` is for body of request.
+- `request.readState == 4` means that you can process it. Should also check that `request.status == 200` before handling the response.
+- You have to be careful with using global variables with these asynchronous requests! Race conditions! Which is why the onreadystatechange was wrapped in that anonymous function.
+- You need to have the request handler /callback modify the HTML since it is asynchronous.
+
+Lec 58: Processing JSON
+- Simple textual representation of data. Easy for humans to read, and easy for machines to parse and generate. It is language independent.
+- Subset of object literal syntax, but propert Names are in double quotes. String values are in double quotes.
+- If you put single quotes around your JSON blob, you can have the JSON string in Javascript.
+- JSON is not a Javascript Object literal, it is just a string.
+- There is `var obj = JSON.parse(jsonString)` and `var str = JSON.stringify(obj)`
+
+Lec 59: Mobile Nav Auto Collapse
+- Want an event handler such that when the menu loses focus (`onBlur`) that the menu goes away.
+- We have to use jQuery because it is a part of Bootstrap.
+- `$` is the name of the jQuery function. it is the same as `document.addEventListener("DomContentLoaded")...`
+- So, this code will process the `function()` when the HTML is loaded, but before styling:
+```javascript
+$(function() {
+    $("#navbarToggle").blur( function(event){...
+        $("#collapsable-nav").collapse('hide'); // jQuery defines collapse
+    });
+});
+```
+The event will basically be `DOMContentLoaded`
+- `$("#navbarToggle")` is basically a query selector in jQuery, eg `document.querySelector("#navbarToggle").addEventListener("blur")`
+- `window.innerWidth` is the width of the browser, not the monitor.
+
+Lec 60: Dynamic Loading Home View Content
+- Want to move towards an SPA (Single Page Application) by loading content dynamically.
+- Don't need to reload page as they move around
+- Need to remove all of main content of the home page and put it into a folder `snippets`
+with a file `home-snippet.html`
+- Links become onClick handlers.
+- We insert the snipped into the main-content placeholder.
+- Need a `showLoading` convenience method while the content is loading.... `http://ajaxload.info` lets you download GIFs for loading icons.
+- Then you make a request for the HTML snippet above in order to insert it.
+- XHR stands for XML/HTTP requests (or AJAX) on the network tab of Chrome Dev Tools, you can use that to see all of the requests
+
+
+Lec 61: Dynamically Loading Menu Categories
+- He deployed an app on Heroku!
+- A REST API that supplies JSON data you need. The data sits as the davids-restaurant app on Heroku. It is Ruby on Rails, which is the backend.
+- There is a single source (same origin) rule on browsers, which gets upset when you try to do AJAX calls from a different domain. It will block it.
+- CORS (Cross Origin Resource Sharing) is the solution
+- There are some HTTP headers which say it is safe to reach out to the other domain name
+- Chrome dev tools has a preview tab that will display JSON really nicely.
+- We use the JSON to generate HTML snippets that we insert
+- The double curly braces are known as mustaches, which are targets for where data will go.
+- You can fill in the string values with `string =string.replace(new RegExp(propToReplace, "g"), propValue)` g means replace everywhere you find.
+- You can send Get Requests with (I think he wrote that wrapper though):
+```javascript
+$ajaxUtils.sendGetRequest(...)
+```
+- You can chain ajax requests inside of the callback of other requests
+
+Lec 62: Dynamic Load of Single Category View
+- `.toFixed(2)` will force 3.00 for the price.
+- You can insert the `clearfix` CSS class with Javascript
+
+Lec 63: Changing Active Button Style
+- You do this by changing the CSS class of the button from home to menu as needed.
 
